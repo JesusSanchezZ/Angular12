@@ -1,0 +1,116 @@
+Configurando el hambiente de local y de trabajo...
+
+nodejs.
+
+node -v
+
+Instalacion de Angular CLI
+     npm install -g @angular/cli@12
+
+     Última versión de Angular
+       npm install -g @angular/cli
+
+Creación del espacio de trabajo
+     npx ng new "nombre del espacio de trabajo"
+
+Inicialización de la aplicación
+     cd "nombre del espacio de trabajo"
+     npx ng serve --open      // -o
+
+Cambio del nombre de la aplicación
+     app.component.ts
+	title = 'Nuevo nombre';
+
+Creación de componentes
+     npx ng generate component "nombre del componente"            //
+
+Mostrando componente en el shell --> app.component.html
+     <app-"nombre del componente"></app-"nombre componente">    // <app-hero></app-hero>
+
+
+Creación de una interfaz --> Modelo
+     src/app/hero.ts
+	export interface Hero {
+	   id: number;
+           name: string;
+	}
+
+Importando la interfaz en un componente
+     import { Hero } from '../hero';
+
+     hero: Hero = { ... }                             // uso de la interfaz
+
+Formatos en componentes html
+     {{ hero.name | uppercase }}        // hero.name = 'hola' ---> renderiza HOLA
+
+
+Enlaces 
+     <input id="name" [(ngModel)]="hero.name" placeholder="name">
+     tenemos que importar ngModel
+     En AppModule
+	import { FormModule } from '@angular/forms';         // <-- NgModel vive aquí
+
+	imports: [
+	   BrowserModule,
+	   FormsModule
+	],
+
+Simulación de datos
+     Creamos un archivo .ts en
+	src/app/mock-heroes.ts                   // sirve para guardar variables 
+	   import { Hero } from './hero';
+
+		export const HEROES: Hero[] = [
+  			{ id: 11, name: 'Dr Nice' },
+ 			{ id: 12, name: 'Narco' },
+  			{ id: 13, name: 'Bombasto' },
+  			{ id: 14, name: 'Celeritas' },
+  			{ id: 15, name: 'Magneta' },
+  			{ id: 16, name: 'RubberMan' },
+  			{ id: 17, name: 'Dynama' },
+  			{ id: 18, name: 'Dr IQ' },
+  			{ id: 19, name: 'Magma' },
+  			{ id: 20, name: 'Tornado' }
+		];
+
+
+Recorrido de un arreglo
+	*ngFor="let hero of heroes"
+
+Evento clic en etiqueta html
+	<li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+	llama a la función onSelect(hero) definida en component.ts
+
+Muestra etiqueta si existe el elemento
+	<div *ngIf="selectedHero">
+
+Cambio de clase con el enlace [class.selected]
+
+Ejemplo de creacion de componente: npx ng generate component hero-detail
+
+
+Añadiendo Servicios
+   Creacion de un servicio
+	npx ng generate service hero
+
+Importando servicio en componente
+     import { HeroService } from '../hero.service';
+
+Inyección del servicio en componente
+     constructor(private heroService: HeroService) {}
+
+Añadiendo ruteo
+    npx ng generate module app-routing --flat --module=app
+
+	--flat pone el archivo en src/app en lugar de su propia carpeta
+	--module=app le dice al CLI que lo registre en el arreglo imports de AppModule
+
+	Añadimos la etiqueta <router-outlet></router-outlet> aquí se muestran las vistas de la ruta seleccionada por el usuario
+
+
+
+
+
+
+
+     
